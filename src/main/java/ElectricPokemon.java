@@ -77,7 +77,13 @@ public class ElectricPokemon extends Pokemon {
         System.out.println(this.getName() + " is attacking " + opponent.getName());
         System.out.println(this.getName() + " rolls an attack bonus of " + attackBonus);
         System.out.println(opponent.getName() + " rolls a defense bonus of " + defenseBonus);
+        boolean isNormal;
+        if ((opponent instanceof FirePokemon) || (opponent instanceof WaterPokemon) || (opponent instanceof ElectricPokemon)){
+            isNormal = false;
 
+        }
+        else
+            isNormal = true;
         boolean usedSpecAttack = false;
         /*
          * Did our attack hit?
@@ -92,7 +98,7 @@ public class ElectricPokemon extends Pokemon {
              */
             if ((opponent.getHitPoints() - totalDamage) > 0) {
                 System.out.println(opponent.getName() + " has " + (opponent.getHitPoints() - totalDamage) + " hit points");
-                if (!opponent.pokeType.equals(this.pokeType) && (Math.random() < specialtyProbability)) {
+                if ((!isNormal ||!opponent.pokeType.equals(this.pokeType)) && (Math.random() < specialtyProbability)) {
                     System.out.println(this.getName() + " executes a speciality attack... " + this.specialtyAttack + "!!!");
                     System.out.println(opponent.getName() + " has been defeated!");
                     usedSpecAttack = true;

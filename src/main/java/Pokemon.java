@@ -18,8 +18,10 @@ public class Pokemon {
 
     /**
      * We now have 3 more sophisticated Pokemon types
-     * that we should differentiate between.
+     * that
+     *we should differentiate between.
      */
+    boolean isNormal;
     public enum PokemonType {
         /**
          * Electric pokemon.
@@ -108,7 +110,6 @@ public class Pokemon {
         this.attackLevel = attack;
         this.defenseLevel = defense;
         this.name = namegibvenwpodh9ayh;
-
     }
 
     /**

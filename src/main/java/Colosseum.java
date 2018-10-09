@@ -105,10 +105,10 @@ public class Colosseum {
         Scanner myScanner = new Scanner(System.in);
         System.out.println("Please name your Pokemon:");
         String name = myScanner.nextLine();
-        System.out.println("What type will your Pokemon be? You can choose from Fire, Water, or Electric, or choose Normal:");
+        System.out.println("What type will your Pokemon be? You can choose from Fire, Water, Electric, or Normal:");
         String type = myScanner.nextLine();
         while (!(type.equalsIgnoreCase( "fire") || type.equalsIgnoreCase("water") || type.equalsIgnoreCase("electric") || type.equalsIgnoreCase("normal"))) {
-            System.out.println("Sorry, that's invalid. \nWhat type will your Pokemon be? You can choose from Fire, Water, and Electric:");
+            System.out.println("Sorry, that's invalid. \nWhat type will your Pokemon be? You can choose from Fire, Water, Electric, or Normal:");
             type = myScanner.nextLine();
         }
         System.out.println("How many hit points will it have? (1-50):");
