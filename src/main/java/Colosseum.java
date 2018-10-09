@@ -102,8 +102,62 @@ public class Colosseum {
      * (Look, we can return objects too!)
      */
     public static Pokemon buildPokemon() {
-        Pokemon returnPokemon = null;
-        return returnPokemon;
+        Scanner myScanner = new Scanner(System.in);
+        System.out.println("Please name your Pokemon:");
+        String name = myScanner.nextLine();
+        System.out.println("What type will your Pokemon be? You can choose from Fire, Water, or Electric, or choose Normal:");
+        String type = myScanner.nextLine();
+        while (!(type.equalsIgnoreCase( "fire") || type.equalsIgnoreCase("water") || type.equalsIgnoreCase("electric") || type.equalsIgnoreCase("normal"))) {
+            System.out.println("Sorry, that's invalid. \nWhat type will your Pokemon be? You can choose from Fire, Water, and Electric:");
+            type = myScanner.nextLine();
+        }
+        System.out.println("How many hit points will it have? (1-50):");
+        int hp = 0;
+        while (hp == 0 || hp > MAX_HIT_POINTS || hp < 1) {
+            hp = myScanner.nextInt();
+            if (hp == 0 || hp > MAX_HIT_POINTS || hp < 1) {
+                System.out.println("Sorry. Hit points must be between 1 and 50, please try again:");
+            }
+        }
+        System.out.println("Split fifty points between attack level and defense level:");
+        System.out.println("Enter your attack level (1-49):");
+        int attack = 0;
+        while (attack == 0 || attack > MAX_HIT_POINTS - 1 || attack < 1) {
+            attack = myScanner.nextInt();
+            if (attack == 0 || attack > MAX_HIT_POINTS - 1 || attack < 1) {
+                System.out.println("Sorry. Attack must be between 1 and 49. Please try again:");
+            }
+        }
+        int maxDefense = MAX_HIT_POINTS - attack;
+        System.out.println("Enter your defense level (1-" + maxDefense + "):");
+        int defense = 0;
+        while (defense == 0 || defense > maxDefense || defense < 1) {
+            defense = myScanner.nextInt();
+            if (defense == 0 || defense > maxDefense || defense < 1) {
+                System.out.println("Sorry. Defense must be between 1 and " + maxDefense + ". Please try again:");
+            }
+        }
+
+        if (type.equalsIgnoreCase("electric")){
+            Pokemon tempPokemon = new ElectricPokemon(hp,attack,defense, name);
+            return tempPokemon;
+
+        }
+        if (type.equalsIgnoreCase("fire")){
+            Pokemon tempPokemon = new FirePokemon(hp,attack,defense, name);
+            return tempPokemon;
+
+        }
+        if (type.equalsIgnoreCase("water")){
+            Pokemon tempPokemon = new WaterPokemon(hp,attack,defense, name);
+            return tempPokemon;
+
+        }
+        if (type.equalsIgnoreCase("normal")) {
+            Pokemon tempPokemon = new Pokemon(hp,attack,defense, name);
+            return tempPokemon;
+        }
+        return null;
     }
 
     /**

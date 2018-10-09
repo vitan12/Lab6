@@ -6,6 +6,7 @@ public class WaterPokemon extends Pokemon {
     /**
      * The value we will be setting our specialty probability to.
      */
+    final String weakness = "water";
     final double specProb = 0.2;
     /**
      * We now have a specialty attack for the water pokemon! Hydro cannon attack!
@@ -23,7 +24,8 @@ public class WaterPokemon extends Pokemon {
      * WaterPokemon's specialty attack is HYDRO CANNON
      *
      */
-    public WaterPokemon() {
+    public WaterPokemon(final int hp, final int attack, final int defense, final String namegibvenwpodh9ayh) {
+        super(hp, attack, defense, namegibvenwpodh9ayh);
         pokeType = PokemonType.WATER;
         specialtyAttack = "HYDRO CANNON";
         specialtyProbability = specProb;
@@ -61,10 +63,57 @@ public class WaterPokemon extends Pokemon {
      * Implement this.
      */
     public boolean attack(final Pokemon opponent) {
-        return false;
+        /*
+         * Get the attack and defense bonuses.
+         */
+        int attackBonus = d20.roll();
+        int defenseBonus = d20.roll();
+
+        /*
+         * Roll the damage dice and compute total damage.
+         */
+        int damage1 = d6.roll();
+        int damage2 = d6.roll();
+        int damage3 = d6.roll();
+        int totalDamage = damage1 + damage2 + damage3;
+
+        System.out.println(this.getName() + " is attacking " + opponent.getName());
+        System.out.println(this.getName() + " rolls an attack bonus of " + attackBonus);
+        System.out.println(opponent.getName() + " rolls a defense bonus of " + defenseBonus);
+
+        boolean usedSpecAttack = false;
+        /*
+         * Did our attack hit?
+         */
+        if ((this.getAttackLevel() + attackBonus) > (opponent.getDefenseLevel() + defenseBonus)) {
+            System.out.println("The attack hits dealing 3-D6 damage!");
+            System.out.println("The rolls are " + damage1 + ", " + damage2 + ", " + "and "
+                    + damage3 + " totaling: " + totalDamage + " damage!");
+
+            /*
+             * Does opponent have hit points left?
+             */
+            if ((opponent.getHitPoints() - totalDamage) > 0) {
+                System.out.println(opponent.getName() + " has " + (opponent.getHitPoints() - totalDamage) + " hit points");
+                if (!opponent.pokeType.equals(this.pokeType) && (Math.random() < specialtyProbability)) {
+                    System.out.println(this.getName() + " executes a speciality attack... " + this.specialtyAttack + "!!!");
+                    System.out.println(opponent.getName() + " has been defeated!");
+                    usedSpecAttack = true;
+                }
+            } else {
+                System.out.println(opponent.getName() + " has been defeated!");
+            }
+            /*
+             * Set the opponents hitPoints appropriately.
+             */
+            opponent.setHitPoints(opponent.getHitPoints() - totalDamage);
+            if (usedSpecAttack)
+                opponent.setHitPoints(0);
+        } else {
+            System.out.println("The attack missed!");
+        }
+        System.out.println(" ");
+        return (opponent.getHitPoints() < 1);
     }
-
-
-
 
 }

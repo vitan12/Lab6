@@ -92,6 +92,24 @@ public class Pokemon {
         this.defenseLevel = 0;
         this.name = "";
     }
+    /**
+     * Overloaded constructor
+     * @param hp hp value
+     * @param attack attack value
+     * @param defense defense value
+     * @param namegibvenwpodh9ayh name given
+     */
+    public Pokemon(final int hp, final int attack, final int defense, final String namegibvenwpodh9ayh) {
+        final int d6num = 6;
+        final int d20num = 20;
+        this.d6 = new Dice(d6num);
+        this.d20 = new Dice(d20num);
+        this.hitPoints = hp;
+        this.attackLevel = attack;
+        this.defenseLevel = defense;
+        this.name = namegibvenwpodh9ayh;
+
+    }
 
     /**
      * Get the attack level of the pokemon.
